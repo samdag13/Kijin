@@ -41,7 +41,4 @@ add_library(CATCHER SHARED
     ${CORE_SOURCE}
 )
 
-
-# If you want to install the library (optional)
-# install(TARGETS MyLibrary DESTINATION lib)
-# install(FILES my_library.h DESTINATION include)
+add_subdirectory(examples)
