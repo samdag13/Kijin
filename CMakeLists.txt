@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.18)
 
 # Set the project name and version
-project(CATCHER)
+project(KIJIN)
 
 # Project detail that can be used in ressource files (e.g. manifest, rc, plist).
 set(${PROJECT_NAME}_AUTHOR "Samuel Dagesse")
-set(${PROJECT_NAME}_NAME "catcher")
+set(${PROJECT_NAME}_NAME "kijin")
 set(${PROJECT_NAME}_DESCRIPTION "Library supporting my applications' development core needs")
 set(${PROJECT_NAME}_COPYRIGHT "(C) Moveck Solution inc., ${${PROJECT_NAME}_CURRENT_YEAR}")
 set(${PROJECT_NAME}_LOGO_PATH "${PROJECT_SOURCE_DIR}/doc/images/kaleido-logo.png")
@@ -30,15 +30,11 @@ string(TOLOWER ${PROJECT_NAME} PROJECT_TITLE)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
-
-set( CORE_SOURCE
-    src/core/Test.cpp src/core/Test.h
-)
-
-# Generate the shared library from the specified source file
-add_library(CATCHER SHARED
-    ${CORE_SOURCE}
-)
-
 add_subdirectory(examples)
+set( CORE_SOURCE
+    src/Test.cpp src/Test.h
+)
+# Generate the shared library from the specified source file
+add_library(KIJIN SHARED
+${CORE_SOURCE}
+)

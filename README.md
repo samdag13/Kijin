@@ -1,2 +1,2 @@
-Catcher is the first installment in the Diamond project suit.
-Like on a baseball field, the catcher is the leader of the team. This library will serve as an application core for my future project.
+Kijin is a project to handle basic application needs for my other projects.
+This is therefore my application core for GUI apps in C++. I'll try my hand at handling a couple plateforme and graphics API too.
