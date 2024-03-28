@@ -24,11 +24,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add subdirectories
 add_subdirectory(examples)
+add_subdirectory(3rdparty)
 
 # Core library sources
 set(CORE_SOURCE
-    src/log.cpp
-    src/log.h
+    src/log.cpp       src/log.h
+    src/window.cpp    src/window.h
 )
 
 # Generate the shared library from the specified source files
@@ -38,6 +39,8 @@ add_library(${PROJECT_NAME} SHARED
 
 # Define KIJIN_EXPORTS when compiling this library
 target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
+
+target_dependency_glfw(${PROJECT_NAME})
 
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
