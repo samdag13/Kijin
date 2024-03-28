@@ -1,4 +1,4 @@
-
+#include <log.h>
 
 int main(int argc, char *argv[])
 {
@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
     {
         foo++;
         foo %= 5;
+        kijin::Print(std::to_string(foo));
     }
     return 0;
 }
