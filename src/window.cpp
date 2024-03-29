@@ -1,8 +1,9 @@
 #include "window.h"
+#include <GLFW/glfw3.h>
 
 struct pimpl
 {
-    // GLFWDisplay *handle{nullptr};
+    GLFWwindow *handle{nullptr};
 };
 
 window::window() : Pimpl(new pimpl)

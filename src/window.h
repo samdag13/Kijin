@@ -10,6 +10,9 @@ public:
     window();
     ~window();
 
+    void init();
+    void execute();
+
 private:
     pimpl *Pimpl;
 };
