@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 # Set the project name and version
-project(KIJIN)
+project(kijin)
 
 # Project detail that can be used in resource files (e.g., manifest, rc, plist).
 set(${PROJECT_NAME}_AUTHOR "Samuel Dagesse")
@@ -43,6 +43,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     glfw
 )
 
+
 # Define KIJIN_EXPORTS when compiling this library
 target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
 
@@ -60,7 +61,7 @@ install(TARGETS ${PROJECT_NAME}
 
 # Install the headers
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/src
-    DESTINATION include/kijin
+    DESTINATION include/
     FILES_MATCHING PATTERN "*.h"
 )
 
