@@ -36,11 +36,12 @@ bool window::init(int width, int height, const char *title, GLFWmonitor *monitor
 }
 
 // TODO: Load openGL functions with GLEW, include & compile glew
-void window::run()
+bool window::run()
 {
     while (!glfwWindowShouldClose(Pimpl->handle))
     {
         /*Render here*/
+
         // glClear(GL_COLOR_BUFFER_BIT);
 
         // Swap front and back buffers
@@ -50,9 +51,10 @@ void window::run()
         glfwPollEvents();
     }
     glfwTerminate();
+    return false;
 }
 
 void window::fb_resize_callback(GLFWwindow *window, int width, int height)
 {
-    // glViewport(0, 0 width, height);
+    // glViewport(0, 0, static_cast<GLint>(width), static_cast<GLint>(height));
 }

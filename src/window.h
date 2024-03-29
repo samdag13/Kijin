@@ -16,7 +16,7 @@ public:
     ~window();
 
     bool init(int width, int height, const char *title, GLFWmonitor *monitor = nullptr, GLFWwindow *share = nullptr);
-    void run();
+    bool run();
 
 private:
     pimpl *Pimpl;
