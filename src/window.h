@@ -9,7 +9,7 @@ struct pimpl;
 class GLFWmonitor;
 class GLFWwindow;
 
-KIJIN_API class window
+class KIJIN_API window
 {
 public:
     window();
