@@ -32,15 +32,19 @@ set(CORE_SOURCE
     src/window.cpp    src/window.h
 )
 
+
 # Generate the shared library from the specified source files
 add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
 )
+add_dependencies(${PROJECT_NAME} glfw)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    glfw
+)
 
 # Define KIJIN_EXPORTS when compiling this library
 target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
-
-target_dependency_glfw(${PROJECT_NAME})
 
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
