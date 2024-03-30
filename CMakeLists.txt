@@ -38,14 +38,17 @@ add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
 )
 add_dependencies(${PROJECT_NAME} glfw)
+add_dependencies(${PROJECT_NAME} glew)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     glfw
+    glew
 )
 
 
 # Define KIJIN_EXPORTS when compiling this library
 target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
+target_compile_definitions(${PROJECT_NAME} PRIVATE GLEW_STATIC)
 
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
