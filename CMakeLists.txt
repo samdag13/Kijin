@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.18)
 
+if(MSVC)  
+  # Suppress LNK4098 warnings: specify the conflicting library
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:libcmt.lib")
+endif()
+
 # Set the project name and version
 project(kijin)
 
@@ -32,31 +37,32 @@ set(CORE_SOURCE
     src/window.cpp    src/window.h
 )
 
-
 # Generate the shared library from the specified source files
 add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
 )
-add_dependencies(${PROJECT_NAME} glfw)
-add_dependencies(${PROJECT_NAME} glew)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE 
-    glfw
-    glew
-)
-
-
-# Define KIJIN_EXPORTS when compiling this library
-target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
-target_compile_definitions(${PROJECT_NAME} PRIVATE GLEW_STATIC)
-
+message(STATUS ${CMAKE_SOURCE_DIR}/3rdparty/glew/include)
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/glew/include>
     $<INSTALL_INTERFACE:include>
 )
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_INCLUDE_DIRS})
 
+# Don't forget to link against OpenGL as GLEW depends on it
+find_package(OpenGL REQUIRED)
+
+message(STATUS ${GLEW_LIB_ARCH_DIR}/glew32s.lib)
+target_link_libraries(${PROJECT_NAME}
+    glfw
+    ${GLEW_LIB_ARCH_DIR}/glew32s.lib 
+    OpenGL::GL
+)
+
+add_compile_definitions(GLEW_STATIC)
+# Define KIJIN_EXPORTS when compiling this library
+target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
 
 # Install the library
 install(TARGETS ${PROJECT_NAME}

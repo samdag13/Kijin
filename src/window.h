@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kijin_export.h"
+#include <GL/glew.h>
 
 #include <array>
 #include <string>
