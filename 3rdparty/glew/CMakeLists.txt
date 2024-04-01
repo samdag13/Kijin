@@ -17,7 +17,6 @@ endif()
 link_directories(${GLEW_LIB_ARCH_DIR})
 
 add_library(glew32s STATIC IMPORTED)
-message(STATUS "Expected GLEW static lib path: ${GLEW_LIB_ARCH_DIR}/glew32s.lib")
 set_target_properties(glew32s PROPERTIES
 IMPORTED_LOCATION ${GLEW_LIB_ARCH_DIR}/glew32s.lib
 INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/include)
