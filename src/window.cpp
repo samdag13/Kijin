@@ -1,4 +1,5 @@
 #include "window.h"
+#include <stb_image.h>
 #include <GLFW/glfw3.h>
 
 struct pimpl
@@ -27,9 +28,7 @@ bool window::init(int width, int height, const char *title, GLFWmonitor *monitor
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    Pimpl->width = width;
-    Pimpl->height = height;
-    Pimpl->handle = glfwCreateWindow(Pimpl->width, Pimpl->height, title, monitor, share);
+    Pimpl->handle = glfwCreateWindow(width, height, title, monitor, share);
 
     if (!Pimpl->handle)
         return false;
