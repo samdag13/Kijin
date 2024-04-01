@@ -1,3 +1,4 @@
+set(3RDPARTY_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE INTERNAL "3rdParty directory")
 
 #==========================Dependencies versions=============================#
 set(
