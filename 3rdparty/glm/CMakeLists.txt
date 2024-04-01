@@ -9,8 +9,8 @@ FetchContent_Declare(
 )
 FetchContent_GetProperties(glm)
 if(NOT glm_POPULATED)
-  FetchContent_Populate(glm)
+    message(STATUS "Populating ${PROJECT_NAME}/glm dependency if needed")
+    FetchContent_Populate(glm)
   # Note: No need to add_subdirectory since GLM is header-only
 endif()
-message(STATUS " GLM include dir: ${glm_SOURCE_DIR}/src")
-set(GLM_INCLUDE_DIR ${glm_SOURCE_DIR}/src CACHE INTERNAL "Path to GLM include directory")
+set(glm_SOURCE_DIR ${glm_SOURCE_DIR} CACHE INTERNAL "Path to GLM include directory")

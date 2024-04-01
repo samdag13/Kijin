@@ -41,21 +41,18 @@ set(CORE_SOURCE
 add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
 )
-
-message(STATUS ${CMAKE_SOURCE_DIR}/3rdparty/glew/include)
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${3RDPARTY_DIR}/glew/include>
     $<BUILD_INTERFACE:${3RDPARTY_DIR}/stb_image>
-    $<BUILD_INTERFACE:${GLM_INCLUDE_DIR}>    
+    $<BUILD_INTERFACE:${glm_SOURCE_DIR}>    
     $<INSTALL_INTERFACE:include>
 )
 
 # Don't forget to link against OpenGL as GLEW depends on it
 find_package(OpenGL REQUIRED)
 
-message(STATUS ${GLEW_LIB_ARCH_DIR}/glew32s.lib)
 target_link_libraries(${PROJECT_NAME}
     glfw
     ${GLEW_LIB_ARCH_DIR}/glew32s.lib 
