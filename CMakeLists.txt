@@ -37,26 +37,41 @@ set(CORE_SOURCE
     src/window.cpp    src/window.h
 )
 
+set(RENDER_SOURCE
+    src/index_buffer.cpp src/index_buffer.h
+    src/renderer.cpp src/renderer.h 
+    src/shader.cpp src/shader.h 
+    src/texture.cpp src/texture.h 
+    src/vertex_array.cpp src/vertex_array.h 
+    src/vertex_buffer_layout.cpp src/vertex_buffer_layout.h 
+    src/vertex_buffer.cpp src/vertex_buffer.h 
+)
+
 # Generate the shared library from the specified source files
 add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
+    ${RENDER_SOURCE}
 )
+
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
     $<BUILD_INTERFACE:${3RDPARTY_DIR}/glew/include>
     $<BUILD_INTERFACE:${3RDPARTY_DIR}/stb_image>
     $<BUILD_INTERFACE:${glm_SOURCE_DIR}>    
+    $<BUILD_INTERFACE:${imgui_SOURCE_DIR}>    
+    $<BUILD_INTERFACE:${imgui_SOURCE_DIR}/backends>    
     $<INSTALL_INTERFACE:include>
 )
 
 # Don't forget to link against OpenGL as GLEW depends on it
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PRIVATE
     glfw
     ${GLEW_LIB_ARCH_DIR}/glew32s.lib 
     OpenGL::GL
+    imgui
 )
 
 add_compile_definitions(GLEW_STATIC)
