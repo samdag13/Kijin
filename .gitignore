@@ -98,4 +98,7 @@ fabric.properties
 .idea/sonarlint
 
 
+#imgui layout
+imgui.ini
+
 # End of https://www.gitignore.io/api/clion
