@@ -1,17 +1,13 @@
 #pragma once
 
 #include "kijin_export.h"
-#include <GL/glew.h>
 
 #include <array>
 #include <string>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
 struct pimpl;
-class GLFWmonitor;
-class GLFWwindow;
+struct GLFWmonitor;
+struct GLFWwindow;
 
 class KIJIN_API window
 {
