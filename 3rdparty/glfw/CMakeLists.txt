@@ -15,3 +15,5 @@ if(NOT glfw_POPULATED)
     FetchContent_Populate(glfw)
     add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR})
 endif()
+
+set(glfw_SOURCE_DIR ${glfw_SOURCE_DIR} CACHE INTERNAL "Source directory for glfw")
