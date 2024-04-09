@@ -12,6 +12,7 @@
     ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 #elif defined(OGL_RELEASE)
 #define GLCall(x) x
+#define ASSERT
 #define LOG(x)
 #else
 #define LOG(x)
