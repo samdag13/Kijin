@@ -5,7 +5,7 @@
 #include "index_buffer.h"
 #include "shader.h"
 
-#ifdef OGL_DEBUG == 1
+#ifdef OGL_DEBUG
 #define LOG(x) std::cout << x << std::endl
 #define ASSERT(y) \
     if (!(y))     \

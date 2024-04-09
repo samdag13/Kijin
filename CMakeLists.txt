@@ -43,7 +43,6 @@ set(RENDER_SOURCE
     src/shader.cpp src/shader.h 
     src/texture.cpp src/texture.h 
     src/vertex_array.cpp src/vertex_array.h 
-    src/vertex_buffer_layout.cpp src/vertex_buffer_layout.h 
     src/vertex_buffer.cpp src/vertex_buffer.h 
 )
 
@@ -76,7 +75,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 add_compile_definitions(GLEW_STATIC)
 # Define KIJIN_EXPORTS when compiling this library
-target_compile_definitions(${PROJECT_NAME} PRIVATE KIJIN_EXPORTS)
+target_compile_definitions(${PROJECT_NAME} PRIVATE 
+    KIJIN_EXPORTS
+    STB_IMAGE_IMPLEMENTATION
+    $<$<CONFIG:Debug>:OGL_DEBUG=1>
+    $<$<CONFIG:Release>:OGL_RELEASE=1>
+)
 
 # Install the library
 install(TARGETS ${PROJECT_NAME}
@@ -96,3 +100,4 @@ install(EXPORT ${PROJECT_NAME}Targets
     NAMESPACE ${PROJECT_NAME}::
     DESTINATION lib/cmake/${PROJECT_NAME}
 )
+
