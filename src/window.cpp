@@ -1,5 +1,12 @@
 #include "window.h"
 
+#include "vertex_buffer.h"
+#include "vertex_buffer_layout.h"
+#include "index_buffer.h"
+#include "vertex_array.h"
+#include "shader.h"
+#include "texture.h"
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -69,17 +76,112 @@ bool window::init(int width, int height, const char *title, GLFWmonitor *monitor
 bool window::run()
 {
 
+#pragma region geometry
+
+    // Vertices position for our triangle
+    float positions[] = {
+        //
+        // (100,100)     (200,100)
+        //          *---*
+        //          | / |
+        //          *---*
+        // (100,200)     (200,200)
+        //
+        //   pos: position row,
+        //   tc: texture coordinate row
+        //   pos,   pos,  pos,   tc,   tc
+        -50.0f, -50.0f, 0.0f, 0.0f, 0.0f, // top left
+        50.0f, -50.0f, 0.0f, 1.0f, 0.0f,  // top right
+        50.0f, 50.0f, 0.0f, 1.0f, 1.0f,   // bottom right
+        -50.0f, 50.0f, 0.0f, 0.0f, 1.0f   // bottom left
+    };
+
+    // Sequence of indices of vertices to draw each triangles that makes up the square
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0};
+
+#pragma endregion
+
+#pragma region blending
+
+    GLCall(glEnable(GL_BLEND));
+    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
+#pragma endregion
+
+#pragma region buffers
+
+    VertexArray va;
+
+    VertexBuffer vb(positions, 5 * 4 * sizeof(float));
+
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    layout.Push<float>(2);
+    va.AddBuffer(vb, layout);
+
+    IndexBuffer ib(indices, 6);
+
+#pragma endregion
+
+#pragma region MVP
+
+    glm::mat4 proj = glm::ortho(0.0f, 960.0f,     // Left-most and right-most bounds (x-axis)
+                                0.0f, 540.0f,     // top-most and bottom-most bound (y-axis)
+                                -100.0f, 100.0f); // frustrum (z-axis)
+
+    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+
+#pragma endregion
+
+#pragma region shader
+
+    Shader shader("resources/shaders/basic_shader.glsl");
+    shader.Bind();
+
+    Texture texture("resources/textures/clouds.png");
+    texture.Bind();
+
+    shader.SetUniform1i("u_Texture", 0);
+
+#pragma endregion
+
+#pragma region unbind
+
+    va.Unbind();
+    vb.Unbind();
+    ib.Unbind();
+
+    shader.Unbind();
+#pragma endregion
+
+#pragma region Render
+
+    Renderer renderer;
+
     glm::vec3 translate(200.f, 200.f, 0.f);
     glm::vec3 scale(1.f, 1.f, 1.f);
     while (!glfwWindowShouldClose(Pimpl->handle))
     {
-        /*Render here*/
+        /* Render here */
+
+        renderer.Clear();
+        // Giving the location and value, we are setting the uniform
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), translate);
+        model = glm::scale(model, scale);
+
+        glm::mat4 mvp = proj * view * model;
+
+        shader.Bind();
+        shader.SetUniformMat4f("u_MVP", mvp);
+
+        renderer.Draw(va, ib, shader);
 
         ImGui::Begin("Debug");
 
@@ -98,6 +200,12 @@ bool window::run()
         // Event polling
         glfwPollEvents();
     }
+#pragma endregion
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
     glfwTerminate();
     return false;
 }
