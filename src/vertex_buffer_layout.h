@@ -19,8 +19,9 @@ struct VertexBufferElement
 			return 4;
 		case GL_UNSIGNED_BYTE:
 			return 1;
+		default:
+			return 0;
 		}
-		// ASSERT(false);
 	}
 };
 class VertexBufferLayout
