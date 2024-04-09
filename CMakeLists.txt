@@ -52,6 +52,11 @@ add_library(${PROJECT_NAME} SHARED
     ${RENDER_SOURCE}
 )
 
+
+target_precompile_headers(${PROJECT_NAME} PUBLIC
+  <string>
+)
+
 # Specify include directories for the KIJIN library
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
