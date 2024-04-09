@@ -13,7 +13,7 @@
 #define GLCall(x)   \
     GLClearError(); \
     x;              \
-    // ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+    ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 #elif defined(OGL_RELEASE)
 #define GLCall(x) x
 #define LOG(x)

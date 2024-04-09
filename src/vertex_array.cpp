@@ -2,6 +2,8 @@
 #include "renderer.h"
 #include "vertex_buffer_layout.h"
 
+#include <cstdint>
+
 VertexArray::VertexArray()
 {
     GLCall(glGenVertexArrays(1, &m_RendererID));
@@ -36,7 +38,7 @@ void VertexArray::AddBuffer(const VertexBuffer &vb, const VertexBufferLayout &la
         const auto &element = elements[i];
         GLCall(glEnableVertexAttribArray(i));
         GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized,
-                                     layout.GetStride(), (const void *)offset));
+                                     layout.GetStride(), reinterpret_cast<const void *>(static_cast<uintptr_t>(offset))));
         offset += element.count * VertexBufferElement::GetSizeOfType(element.type);
     }
 }
