@@ -45,6 +45,7 @@ set(GFX_SOURCE
     src/texture.cpp src/texture.h 
     src/vertex_array.cpp src/vertex_array.h 
     src/vertex_buffer.cpp src/vertex_buffer.h 
+    src/camera.cpp src/camera.h
 )
 
 # Generate the shared library from the specified source files
