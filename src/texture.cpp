@@ -1,8 +1,8 @@
 #include "texture.h"
 #include <stb_image.h>
 
-Texture::Texture(const std::string& path)
-	: RendererID(0), Filepath(path), LocalBuffer(nullptr), Width(0), Heigth(0), BPP(0)
+Texture::Texture(const std::string &path)
+	: RendererID(0), Filepath(path), m_localBuffer(nullptr), m_Width(0), m_Heigth(0), m_BPP(0)
 {
 	stbi_set_flip_vertically_on_load(1);
 	LocalBuffer = stbi_load(path.c_str(), &Width, &Heigth, &BPP, 4);

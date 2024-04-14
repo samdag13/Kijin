@@ -28,6 +28,7 @@ class VertexBufferLayout
 {
 private:
 	std::vector<VertexBufferElement> Elements;
+	//Stride between Vertices in the VBO, not stridre betweem buffer elements
 	unsigned int Stride;
 
 public:
@@ -43,24 +44,24 @@ public:
 	template <>
 	void Push<float>(unsigned int count)
 	{
-		Elements.push_back({ GL_FLOAT, count, GL_FALSE });
+		Elements.push_back({GL_FLOAT, count, GL_FALSE});
 		Stride += VertexBufferElement::GetSizeOfType(GL_FLOAT) * count;
 	}
 
 	template <>
 	void Push<unsigned int>(unsigned int count)
 	{
-		Elements.push_back({ GL_UNSIGNED_INT, count, GL_FALSE });
+		Elements.push_back({GL_UNSIGNED_INT, count, GL_FALSE});
 		Stride += VertexBufferElement::GetSizeOfType(GL_UNSIGNED_INT) * count;
 	}
 
 	template <>
 	void Push<unsigned char>(unsigned int count)
 	{
-		Elements.push_back({ GL_UNSIGNED_BYTE, count, GL_TRUE });
+		Elements.push_back({GL_UNSIGNED_BYTE, count, GL_TRUE});
 		Stride += VertexBufferElement::GetSizeOfType(GL_UNSIGNED_BYTE) * count;
 	}
 
-	inline const std::vector<VertexBufferElement> GetElements() const& { return Elements; }
+	inline const std::vector<VertexBufferElement> GetElements() const & { return Elements; }
 	inline unsigned int GetStride() const { return Stride; }
 };
