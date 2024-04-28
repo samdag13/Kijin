@@ -1,6 +1,6 @@
 #include "camera.h"
 
-glm::mat4 camera::look_at()
+glm::mat4 Camera::look_at()
 {   
     glm::mat4 base {
         Right.x,     Right.y,     Right.z,     0.f,
