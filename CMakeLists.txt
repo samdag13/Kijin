@@ -44,7 +44,8 @@ set(GFX_SOURCE
     src/shader.cpp src/shader.h 
     src/texture.cpp src/texture.h 
     src/vertex_array.cpp src/vertex_array.h 
-    src/vertex_buffer.cpp src/vertex_buffer.h 
+    src/vertex_buffer.cpp src/vertex_buffer.h
+    src/mesh.cpp src/mesh.h
     src/camera.cpp src/camera.h
 )
 
