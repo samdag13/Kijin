@@ -1,29 +1,31 @@
 
 #pragma once
+#include "renderable.h"
 
-#include "vertex_array.h"
-#include "vertex_buffer.h"
-#include "index_buffer.h"
-#include "vertex_buffer_layout.h"
-#include "texture.h"
-
-class mesh
+class Texture;
+class VertexBuffer;
+class IndexBuffer;
+class VertexArray;
+class VertexBufferLayout;
+class Mesh : public Renderable
 {
 public:
-    mesh();
-    ~mesh();
+    Mesh();
+    ~Mesh();
 
-    void set_texture(texture t);
-    void set_vertex_buff(set_vertex_buff vb);
-    void set_index_buff(IndexBuffer ib);
-    void set_vertex_arr(VertexArray va);
+    void SetTexture(const std::string &path);
+    void SetVertices(float *vertices, unsigned int vertex_size, unsigned int vertex_count, unsigned int *indices, unsigned int index_count);
+
+#pragma region RENDERABLE_INTERFACE
+    void Draw() const override;
+    void Bind() const override;
+    void Unbind() const override;
+#pragma endregion RENDERABLE_INTERFACE
 
 private:
-    VertexBuffer VB;
-    IndexBuffer IB;
-    VertexBufferLayout VBLayout;
-    VertexArray VA;
-    Texture TexturePack;
-
-    update_vb_layout();
+    std::unique_ptr<VertexBuffer> VB;
+    std::unique_ptr<IndexBuffer> IB;
+    std::unique_ptr<VertexArray> VA;
+    std::unique_ptr<Texture> TexturePack;
+    std::unique_ptr<VertexBufferLayout> Layout;
 };

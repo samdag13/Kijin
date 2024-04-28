@@ -59,6 +59,9 @@ add_library(${PROJECT_NAME} SHARED
 target_precompile_headers(${PROJECT_NAME} PUBLIC
   <string>
   <cassert>
+  <memory>
+  <list>
+  <vector>
 )
 
 # Specify include directories for the KIJIN library

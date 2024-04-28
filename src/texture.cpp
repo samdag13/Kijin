@@ -2,7 +2,7 @@
 #include <stb_image.h>
 
 Texture::Texture(const std::string &path)
-	: RendererID(0), Filepath(path), m_localBuffer(nullptr), m_Width(0), m_Heigth(0), m_BPP(0)
+	: RendererID(0), Filepath(path), LocalBuffer(nullptr), m_Width(0), m_Heigth(0), m_BPP(0)
 {
 	stbi_set_flip_vertically_on_load(1);
 	LocalBuffer = stbi_load(path.c_str(), &Width, &Heigth, &BPP, 4);
@@ -40,4 +40,9 @@ void Texture::Bind(unsigned int slot) const
 void Texture::Unbind() const
 {
 	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+}
+
+bool Texture::IsEmpty() const
+{
+	return LocalBuffer;
 }
