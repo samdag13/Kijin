@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "kijin_export.h"
+#include "kijin.h"
 
 namespace kijin
 {
