@@ -1,5 +1,5 @@
 #include "vertex_array.h"
-#include "renderer.h"
+#include "gfx_core.h"
 #include "vertex_buffer_layout.h"
 
 #include <cstdint>

@@ -1,5 +1,5 @@
 #pragma once
-#include "renderer.h"
+#include "gfx_core.h"
 
 class Texture
 {
