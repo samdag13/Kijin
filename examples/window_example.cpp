@@ -3,9 +3,9 @@
 
 int main(int argc, char *argv)
 {
-    window w;
-    w.init(400, 400, "Hello World");
-    while (w.run())
+    Window w;
+    w.Init(400, 400, "Hello World");
+    while (w.Draw())
         ;
     return 0;
 }

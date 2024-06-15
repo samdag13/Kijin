@@ -9,17 +9,17 @@ struct pimpl;
 struct GLFWmonitor;
 struct GLFWwindow;
 
-class KIJIN_API window
+class KIJIN_API Window
 {
 public:
-    window();
-    ~window();
+    Window();
+    virtual ~Window();
 
-    bool init(int width, int height, const char *title, GLFWmonitor *monitor = nullptr, GLFWwindow *share = nullptr);
-    bool run();
+    bool Init(int width, int height, const char* title, GLFWmonitor* monitor = nullptr, GLFWwindow* share = nullptr);
+    bool Draw();
 
 private:
-    pimpl *Pimpl;
+    pimpl* Pimpl;
 
-    static void fb_resize_callback(GLFWwindow *window, int width, int height);
+    static void FbResizeCallback(GLFWwindow* window, int width, int height);
 };

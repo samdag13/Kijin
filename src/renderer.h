@@ -18,9 +18,9 @@
 #define LOG(x)
 #endif
 
-void AdjustIncrement(float &increment, float component);
+void AdjustIncrement(float& increment, float component);
 void GLClearError();
-bool GLLogCall(const char *function, const char *file, int line);
+bool GLLogCall(const char* function, const char* file, int line);
 
 class VertexArray;
 class IndexBuffer;
@@ -32,5 +32,5 @@ class Renderer
 private:
 public:
     void Clear() const;
-    void Draw(const VertexArray &va, const IndexBuffer &ib, const Shader &shader) const;
+    void Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const;
 };

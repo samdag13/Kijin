@@ -18,21 +18,21 @@
 
 struct pimpl
 {
-    GLFWwindow *handle{nullptr};
-    int width;
-    int height;
+    GLFWwindow* Handle{ nullptr };
+    int Width;
+    int Height;
 };
 
-window::window() : Pimpl(new pimpl)
+Window::Window() : Pimpl(new pimpl)
 {
 }
 
-window::~window()
+Window::~Window()
 {
     delete Pimpl;
 }
 
-bool window::init(int width, int height, const char *title, GLFWmonitor *monitor, GLFWwindow *share)
+bool Window::Init(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 {
 
     if (!glfwInit())
@@ -42,13 +42,13 @@ bool window::init(int width, int height, const char *title, GLFWmonitor *monitor
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    Pimpl->handle = glfwCreateWindow(width, height, title, monitor, share);
+    Pimpl->Handle = glfwCreateWindow(width, height, title, monitor, share);
 
-    if (!Pimpl->handle)
+    if (!Pimpl->Handle)
         return false;
 
-    glfwMakeContextCurrent(Pimpl->handle);
-    glfwSetFramebufferSizeCallback(Pimpl->handle, fb_resize_callback);
+    glfwMakeContextCurrent(Pimpl->Handle);
+    glfwSetFramebufferSizeCallback(Pimpl->Handle, FbResizeCallback);
     glfwSwapInterval(1);
 
     // Verify that glew init succeeds, which makes the link between the openGL implementation of the hardware and the standard function calls.
@@ -59,21 +59,21 @@ bool window::init(int width, int height, const char *title, GLFWmonitor *monitor
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO();
     (void)io;
 
     // Setup Dear ImGui style
 
     ImGui::StyleColorsDark();
 
-    ImGui_ImplOpenGL3_Init((char *)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
-    ImGui_ImplGlfw_InitForOpenGL(Pimpl->handle, true);
+    ImGui_ImplOpenGL3_Init((char*)glGetString(GL_NUM_SHADING_LANGUAGE_VERSIONS));
+    ImGui_ImplGlfw_InitForOpenGL(Pimpl->Handle, true);
 
     return true;
 }
 
 // TODO: Load openGL functions with GLEW, include & compile glew
-bool window::run()
+bool Window::Draw()
 {
 
 #pragma region geometry
@@ -99,7 +99,7 @@ bool window::run()
     // Sequence of indices of vertices to draw each triangles that makes up the square
     unsigned int indices[] = {
         0, 1, 2,
-        2, 3, 0};
+        2, 3, 0 };
 
 #pragma endregion
 
@@ -128,8 +128,8 @@ bool window::run()
 #pragma region MVP
 
     glm::mat4 proj = glm::ortho(0.0f, 960.0f,     // Left-most and right-most bounds (x-axis)
-                                0.0f, 540.0f,     // top-most and bottom-most bound (y-axis)
-                                -100.0f, 100.0f); // frustrum (z-axis)
+        0.0f, 540.0f,     // top-most and bottom-most bound (y-axis)
+        -100.0f, 100.0f); // frustrum (z-axis)
 
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
@@ -162,7 +162,7 @@ bool window::run()
 
     glm::vec3 translate(200.f, 200.f, 0.f);
     glm::vec3 scale(1.f, 1.f, 1.f);
-    while (!glfwWindowShouldClose(Pimpl->handle))
+    while (!glfwWindowShouldClose(Pimpl->Handle))
     {
         /* Render here */
 
@@ -195,7 +195,7 @@ bool window::run()
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // Swap front and back buffers
-        glfwSwapBuffers(Pimpl->handle);
+        glfwSwapBuffers(Pimpl->Handle);
 
         // Event polling
         glfwPollEvents();
@@ -210,7 +210,7 @@ bool window::run()
     return false;
 }
 
-void window::fb_resize_callback(GLFWwindow *window, int width, int height)
+void Window::FbResizeCallback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, static_cast<GLint>(width), static_cast<GLint>(height));
 }
