@@ -6,6 +6,7 @@
 #include "vertex_array.h"
 #include "shader.h"
 #include "texture.h"
+#include "renderer.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

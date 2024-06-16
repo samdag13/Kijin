@@ -10,14 +10,8 @@ private:
 	int Width, Heigth, BPP;
 
 public:
-    Texture() = default;
-	Texture(const std::string& path);
-	~Texture();
-	void Bind(unsigned int slot = 0) const;
-	void Unbind() const;
-
 	Texture() = default;
-	Texture(const std::string &path);
+	Texture(const std::string& path);
 	~Texture();
 	void Bind(unsigned int slot = 0) const;
 	void Unbind() const;

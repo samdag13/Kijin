@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kijin_export.h>
+#include <kijin.h>
 #include <base_window.h>
 #include <memory>
 #include <vector>

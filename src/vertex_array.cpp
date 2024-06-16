@@ -27,18 +27,18 @@ void VertexArray::Unbind() const
 /* @brief: Binds the vertex array and the vertex buffer we want to set up with it. Also sets the vb layout
  */
 
-void VertexArray::AddBuffer(const VertexBuffer *vb, const VertexBufferLayout *layout)
+void VertexArray::AddBuffer(const VertexBuffer* vb, const VertexBufferLayout* layout)
 {
     Bind();
     vb->Bind();
-    const std::vector<VertexBufferElement> &elements = layout->GetElements();
+    const std::vector<VertexBufferElement>& elements = layout->GetElements();
     unsigned int offset = 0;
     for (unsigned int i = 0; i < elements.size(); i++)
     {
         const auto& element = elements[i];
         GLCall(glEnableVertexAttribArray(i));
-        GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized,
-                                     layout->GetStride(), reinterpret_cast<const void *>(static_cast<uintptr_t>(offset))));
-        offset += element.count * VertexBufferElement::GetSizeOfType(element.type);
+        GLCall(glVertexAttribPointer(i, element.Count, element.Type, element.Normalized,
+            layout->GetStride(), reinterpret_cast<const void*>(static_cast<uintptr_t>(offset))));
+        offset += element.Count * VertexBufferElement::GetSizeOfType(element.Type);
     }
 }
