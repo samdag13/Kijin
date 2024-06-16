@@ -1,11 +1,13 @@
 
-#include <window.h>
+#include <base_window.h>
+#include <base_application.h>
 
-int main(int argc, char *argv)
+int main(int argc, char* argv)
 {
-    Window w;
+    BaseWindow w;
     w.Init(400, 400, "Hello World");
-    while (w.Draw())
-        ;
+    BaseApplication app;
+    app.RegisterWindow(&w);
+    app.Run();
     return 0;
 }
