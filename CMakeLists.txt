@@ -11,7 +11,7 @@ project(kijin)
 # Project detail that can be used in resource files (e.g., manifest, rc, plist).
 set(${PROJECT_NAME}_AUTHOR "Samuel Dagesse")
 set(${PROJECT_NAME}_NAME "kijin")
-set(${PROJECT_NAME}_DESCRIPTION "Library supporting my applications' development core needs")
+set(${PROJECT_NAME}_DESCRIPTION "C++ Application development toolbox")
 
 # Project version number.
 # Using semantic versioning https://semver.org
@@ -33,11 +33,12 @@ add_subdirectory(3rdparty)
 
 # Core library sources
 set(CORE_SOURCE
-    src/log.cpp       src/log.h
-    src/window.cpp    src/window.h
+    src/log.cpp                 src/log.h
+    src/base_window.cpp         src/base_window.h
+    src/base_application.cpp    src/base_application.h
 )
 
-set(RENDER_SOURCE
+set(GFX_SOURCE
     src/index_buffer.cpp src/index_buffer.h
     src/renderer.cpp src/renderer.h 
     src/shader.cpp src/shader.h 
@@ -49,12 +50,13 @@ set(RENDER_SOURCE
 # Generate the shared library from the specified source files
 add_library(${PROJECT_NAME} SHARED
     ${CORE_SOURCE}
-    ${RENDER_SOURCE}
+    ${GFX_SOURCE}
 )
 
 
 target_precompile_headers(${PROJECT_NAME} PUBLIC
   <string>
+  <cassert>
 )
 
 # Specify include directories for the KIJIN library
